@@ -59,20 +59,29 @@ public class CalcModel<T>
   } // compute(String, Double, Double)
 
   public Double[] printStack()
+    throws NullPointerException
   {
-    Iterator<Double> it = this.stack.iterator();
-    Double[] vals = new Double[this.stack.size()];
-    for (int i = 0; it.hasNext(); i++)
+    if (this.stack.isEmpty())
+      throw new NullPointerException();
+    else
       {
-        vals[i] = (Double) it.next();
-      } // for(i)
-
-    return vals;
+        Iterator<Double> it = this.stack.iterator();
+        Double[] vals = new Double[this.stack.size()];
+        for (int i = 0; it.hasNext(); i++)
+          {
+            vals[i] = (Double) it.next();
+          } // for(i)
+        return vals;
+      }
   } // printStack()
 
   public Double printTop()
+    throws NullPointerException
   {
-    return (Double) this.stack.peek();
+    if (!this.stack.isEmpty())
+      return (Double) this.stack.peek();
+    else
+      throw new NullPointerException();
   } // printTop()
 
   public void clear()

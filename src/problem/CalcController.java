@@ -37,33 +37,58 @@ public class CalcController
                       {
                         val1 = this.model.pop();
                         this.model.operation(temp, val1, val2);
-                      }
+                      } // if !this.model.isEmpty()
                     else
-                      throw new Exception("stack is empty!");
-                  }
+                      {
+                        this.model.push(val2);
+                        CalcView.printMsg("stack is empty!");
+                      }
+                  } // !this.model.isEmpty()
                 else
-                  throw new Exception("stack is empty!");
-              }
-            if (temp == 'p')
-              CalcView.print(this.model.printTop());
-            if (temp == 'c')
-              this.model.clear();
-            if (temp == 's')
-              CalcView.print(this.model.printStack());
-            if (temp == 'c')
-              this.model.clear();
-            if (temp == 'q')
+                  CalcView.printMsg("stack is empty!");
+              } // if temp == '+' || temp == '-' || temp == '*' || temp == '/'
+            else
               {
-                CalcView.printMsg("Bye-bye!");
-                this.model.clear();
-                this.mode = false;
-                CalcView.pen.flush();
-                CalcView.eyes.close();
-                CalcView.is.close();                  
-              }
-          } // else
+                switch (temp)
+                  {
+                    case 'p':
+                      try
+                        {
+                          CalcView.print(this.model.printTop());
+                        }
+                      catch (NullPointerException npe)
+                        {
+                          CalcView.printMsg("stack is empty");
+                        }
+                      break;
+                    case 'c':
+                      this.model.clear();
+                      break;
+                    case 's':
+                      try
+                        {
+                          CalcView.print(this.model.printStack());
+                        }
+                      catch (NullPointerException npe)
+                        {
+                          CalcView.printMsg("stack is empty");
+                        }
+                      break;
+                    case 'q':
+                      CalcView.printMsg("Bye-bye!");
+                      this.model.clear();
+                      this.mode = false;
+                      CalcView.pen.flush();
+                      CalcView.eyes.close();
+                      CalcView.is.close();
+                      break;
+                    default:
+                      CalcView.printMsg("invalid input");
+                  } // switch (temp)
+              } // else
+          } // if
       } // for (i)
-  } // compute(String)
+  }// compute(String)
 
   // helper
   // http://www.coderanch.com/t/405258/java/java/String-IsNumeric
