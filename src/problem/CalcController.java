@@ -2,10 +2,21 @@ package problem;
 
 public class CalcController
 {
+  // +--------+----------------------------------------------------------
+  // | Fields |
+  // +--------+
+  /**
+   * A model to do computation and store values
+   */
   CalcModel<Double> model;
+  /**
+   * A boolean flag to determine if the calculator is on
+   */
   boolean mode = false;
 
-  // CalcView view;
+  // +--------------+----------------------------------------------------
+  // | Constructors |
+  // +--------------+
 
   public CalcController() throws Exception
   {
@@ -13,6 +24,17 @@ public class CalcController
     this.mode = true;
   } // CalcController()
 
+  // +---------+----------------------------------------------------------
+  // | Methods |
+  // +---------+
+
+  /**
+   * compute a given operation
+   * 
+   * @param str
+   *          a valid string
+   * @throws Exception
+   */
   public void compute(String str)
     throws Exception
   {
@@ -37,10 +59,12 @@ public class CalcController
                       {
                         val1 = this.model.pop();
                         this.model.operation(temp, val1, val2);
+                        // uses model to do the algebra
                       } // if !this.model.isEmpty()
                     else
                       {
                         this.model.push(val2);
+                        // if val1 doesn't exist, put val2 back
                         CalcView.printMsg("stack is empty!");
                       }
                   } // !this.model.isEmpty()
@@ -55,11 +79,11 @@ public class CalcController
                       try
                         {
                           CalcView.print(this.model.printTop());
-                        }
+                        } // try
                       catch (NullPointerException npe)
                         {
                           CalcView.printMsg("stack is empty");
-                        }
+                        } // catch
                       break;
                     case 'c':
                       this.model.clear();
@@ -68,11 +92,11 @@ public class CalcController
                       try
                         {
                           CalcView.print(this.model.printStack());
-                        }
+                        } // try
                       catch (NullPointerException npe)
                         {
                           CalcView.printMsg("stack is empty");
-                        }
+                        } // catch
                       break;
                     case 'q':
                       CalcView.printMsg("Bye-bye!");
@@ -90,18 +114,21 @@ public class CalcController
       } // for (i)
   }// compute(String)
 
-  // helper
+  // +--------+----------------------------------------------------------
+  // | Helper |
+  // +--------+
+  // This method is copied and changed from:
   // http://www.coderanch.com/t/405258/java/java/String-IsNumeric
   boolean isNumeric(String str)
   {
     try
       {
         Double.parseDouble(str);
-      }
+      } // try
     catch (NumberFormatException nfe)
       {
         return false;
-      }
+      } // catch
     return true;
   } // isNumeric(String str)
 
