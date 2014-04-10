@@ -117,8 +117,17 @@ public class CalcController
   // +--------+----------------------------------------------------------
   // | Helper |
   // +--------+
-  // This method is copied and changed from:
-  // http://www.coderanch.com/t/405258/java/java/String-IsNumeric
+
+  /**
+   * A helper to determine if a string is purely numeric.This method is copied
+   * and changed from:
+   * http://www.coderanch.com/t/405258/java/java/String-IsNumeric
+   * 
+   * @param str
+   *          A valid string
+   * @return true, if the string is purely numeric. Vice versa.
+   */
+
   boolean isNumeric(String str)
   {
     try
