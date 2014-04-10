@@ -3,8 +3,8 @@ package problem;
 public class MatchParenExpt
 {
 
-  
-  public static void main(String[] args) throws Exception
+  public static void main(String[] args)
+    throws Exception
   {
     String a = "{oh [boy] (I am having) (<so> much) fun matching `symbols'}";
     MatchParen.Match(a);
@@ -14,5 +14,5 @@ public class MatchParenExpt
     MatchParen.Match(c);
     String d = ")()(((()()";
     MatchParen.Match(d);
-  } // main
-}
+  } // main(String[])
+} // class MatchParenExpt

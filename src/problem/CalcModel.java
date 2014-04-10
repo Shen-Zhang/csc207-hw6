@@ -6,11 +6,18 @@ import java.util.Stack;
 public class CalcModel<T>
 
 {
-  // Fields
+  // +--------+----------------------------------------------------------
+  // | Fields |
+  // +--------+
 
+  /**
+   * The stack to store results and operations
+   */
   Stack<Double> stack;
 
-  // Constructor
+  // +--------------+----------------------------------------------------
+  // | Constructors |
+  // +--------------+
 
   public CalcModel() throws Exception
   {
@@ -36,10 +43,22 @@ public class CalcModel<T>
     return (Double) this.stack.pop();
   }
 
-  // Methods
+  // +---------+---------------------------------------------------
+  // | Methods |
+  // +---------+
 
+  /**
+   * 
+   * Compute val1 and val2 by given operation
+   * 
+   * @param oper
+   *          oper can only be '+', '-', '*' or '/'
+   * @param val1
+   *          a real number
+   * @param val2
+   *          a real number
+   */
   public void operation(char oper, Double val1, Double val2)
-    throws Exception
   {
     switch (oper)
       {
@@ -58,6 +77,12 @@ public class CalcModel<T>
       } // switch
   } // compute(String, Double, Double)
 
+  /**
+   * Print the current stack
+   * 
+   * @return an array of double
+   * @throws NullPointerException
+   */
   public Double[] printStack()
     throws NullPointerException
   {
@@ -75,6 +100,12 @@ public class CalcModel<T>
       }
   } // printStack()
 
+  /**
+   * Print the top value on the stack
+   * 
+   * @return a double
+   * @throws NullPointerException
+   */
   public Double printTop()
     throws NullPointerException
   {
@@ -84,6 +115,11 @@ public class CalcModel<T>
       throw new NullPointerException();
   } // printTop()
 
+  /**
+   * remove all the items on the current stack
+   * 
+   * @throws Exception
+   */
   public void clear()
     throws Exception
   {

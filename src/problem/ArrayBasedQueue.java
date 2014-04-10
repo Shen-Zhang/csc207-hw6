@@ -3,15 +3,15 @@ package problem;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-
 /**
  * Queues implemented with arrays.
- *
+ * 
  * @author Samuel A. Rebelsky
  * @author Shen Zhang
  */
 public class ArrayBasedQueue<T>
-    implements Queue<T>
+    implements
+      Queue<T>
 {
   // +--------+----------------------------------------------------------
   // | Fields |
@@ -23,12 +23,12 @@ public class ArrayBasedQueue<T>
   T[] values;
 
   /**
-   * The index of the front of the queue.  
+   * The index of the front of the queue.
    */
   int front;
-  
+
   /**
-   * The index of the last element of the queue.  
+   * The index of the last element of the queue.
    */
   int back;
 
@@ -52,7 +52,7 @@ public class ArrayBasedQueue<T>
       {
         throw new Exception("Queues must have a positive capacity.");
       } // if (capacity <= 0)
-    // Yay Java!  It's not possible to say new T[capacity], so
+    // Yay Java! It's not possible to say new T[capacity], so
     // we use this hack.
     this.values = (T[]) new Object[capacity];
     this.front = 0;
@@ -65,7 +65,7 @@ public class ArrayBasedQueue<T>
   // +---------------+
 
   @Override
-  public boolean isEmpty() 
+  public boolean isEmpty()
   {
     return this.size <= 0;
   } // isEmpty()
@@ -100,8 +100,8 @@ public class ArrayBasedQueue<T>
     // Grab and clear the element at the front of the queue
     T result = this.values[this.front];
     this.values[this.front] = null;
-    this.front = (this.front + 1)  % this.values.length;
-    
+    this.front = (this.front + 1) % this.values.length;
+
     // We're removing an element, so decrement the size
     --this.size;
     // And we're done
@@ -139,27 +139,20 @@ public class ArrayBasedQueue<T>
     return new ArrayBasedQueueIterator<T>(this);
   } // iterator()
 
-  // +----------------+--------------------------------------------------
-  // | Helper Methods |
-  // +----------------+
-
-  /**
-   * Get the index of the back of the queue.  The back is where we
-   * add the next element.
-   */
-  //int back()
-  //{
-    //return this.size;
-  //} // back()
 
 } // class ArrayBasedQueue<T>
 
 class ArrayBasedQueueIterator<T>
-    implements Iterator<T>
+    implements
+      Iterator<T>
 {
   // +--------+----------------------------------------------------------
-  // | Fields |
-  // +--------+
+  int front;
+  int prev;
+  int size;
+  T[] vals;
+  int count;
+  boolean okToRemove;
 
   // +--------------+----------------------------------------------------
   // | Constructors |
@@ -170,7 +163,12 @@ class ArrayBasedQueueIterator<T>
    */
   public ArrayBasedQueueIterator(ArrayBasedQueue<T> q)
   {
-    return Iterator<q> 
+    this.front = q.front;
+    this.prev = 0;
+    this.size = q.size;
+    this.vals = q.values;
+    this.count = 0;
+    okToRemove = false;
   } // ArrayBasedQueueIterator
 
   // +---------+---------------------------------------------------------
@@ -184,22 +182,30 @@ class ArrayBasedQueueIterator<T>
     if (!this.hasNext())
       {
         throw new NoSuchElementException("no elements remain");
-      } // if no elements 
-    // STUB
-    throw new NoSuchElementException("unimplemented");
+      } // if no elements
+    okToRemove = true;
+    int temp = this.front;
+    this.prev = this.front;
+    this.front = (this.front + 1) % this.size;
+    this.count++;
+    return this.vals[temp];
+    
   } // next()
 
   @Override
   public boolean hasNext()
   {
-    // STUB
-    return false;
+    okToRemove = false;
+    return this.count < this.size;
   } // hasNext()
 
   @Override
   public void remove()
-    throws UnsupportedOperationException
+    throws IllegalStateException
   {
-    throw new UnsupportedOperationException();
+    if (okToRemove)
+      this.vals[this.prev] = null;
+    else
+      throw new IllegalStateException();
   } // remove()
 } // ArrayBasedQueueIterator<T>

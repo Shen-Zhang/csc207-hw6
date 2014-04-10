@@ -6,8 +6,19 @@ import java.io.PrintWriter;
 
 public class CalcView
 {
+  /**
+   * A pen to print value, values and message.
+   */
   static PrintWriter pen = new PrintWriter(System.out, true);
+
+  /**
+   * An is to read the input stream.
+   */
   static InputStreamReader is = new InputStreamReader(System.in);
+
+  /**
+   * eyes to read lines
+   */
   static BufferedReader eyes = new BufferedReader(is);
 
   public static void main(String[] args)
@@ -32,11 +43,23 @@ public class CalcView
 
   } // main
 
+  /**
+   * print a value
+   * 
+   * @param val
+   *          a real value
+   */
   public static void print(Double val)
   {
     pen.println(val);
   } // print
 
+  /**
+   * print an array of double
+   * 
+   * @param vals
+   *          an array of double
+   */
   public static void print(Double[] vals)
   {
     pen.print("[");
@@ -48,6 +71,12 @@ public class CalcView
     pen.println(vals[vals.length - 1] + "]");
   } // print
 
+  /**
+   * print a piece of message
+   * 
+   * @param str
+   *          a valid string
+   */
   public static void printMsg(String str)
   {
     pen.println(str);

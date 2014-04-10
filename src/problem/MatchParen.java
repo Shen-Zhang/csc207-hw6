@@ -5,8 +5,19 @@ import java.io.PrintWriter;
 public class MatchParen
 {
 
+  /**
+   * A pen to print result and messages
+   */
   static PrintWriter pen = new PrintWriter(System.out, true);
 
+  /**
+   * Check if the parentheses/brackets in the string are matched and print the
+   * result
+   * 
+   * @param str
+   *          A valid string
+   * @throws Exception
+   */
   public static void Match(String str)
     throws Exception
   {
@@ -47,20 +58,28 @@ public class MatchParen
       {
         group x = stack.pop();
         String format = "%" + (1 + x.index + "<-UNMATCHED".length()) + "s";
-        pen.format(format, x.ch + "<-UNMATCHED");
+        pen.format(format, x.ch + "<-UNMATCHED"); // format the string
         pen.println();
       } // while
-    
+
     pen.println();
     pen.flush();
-  } // Match(String)
+  } // Match (String)
 
-  // inner class
+  // +-------------+---------------------------------------------------------
+  // | Inner Class |
+  // +-------------+
   static class group
   {
+    // +--------+---------------------------------------------------------
+    // | Fields |
+    // +--------+
     int index;
     char ch;
 
+    // +-------------+---------------------------------------------------------
+    // | Constructor |
+    // +-------------+
     public group(char ch, int index)
     {
       this.ch = ch;
@@ -69,7 +88,22 @@ public class MatchParen
 
   }// class group
 
-  // helper
+  // +--------+---------------------------------------------------------
+  // | Helper |
+  // +--------+
+  /**
+   * A helper for drawing lines
+   * 
+   * @param stack
+   *          A valid stack
+   * @param open
+   *          open parenthesis/bracket
+   * @param close
+   *          closed parenthesis/bracket
+   * @param index
+   *          an integer
+   * @throws Exception
+   */
   public static void drawLine(ArrayBasedStack<group> stack, char open,
                               char close, int index)
     throws Exception
@@ -83,9 +117,9 @@ public class MatchParen
 
         if (checkMatch.ch == open)
           {
-            int length = index - checkMatch.index - 1;
+            int length = index - checkMatch.index - 1; // the length of the line
             format = "%" + (checkMatch.index + 1) + "s";
-            pen.format(format, open);
+            pen.format(format, open); // format the string
             for (int i = 0; i < length; i++)
               {
                 pen.print('-');
@@ -96,16 +130,16 @@ public class MatchParen
         else
           {
             format = "%" + (1 + index + "<-UNMATCHED".length()) + "s";
-            pen.format(format, close + "<-UNMATCHED");
+            pen.format(format, close + "<-UNMATCHED"); // format the string
             pen.println();
           } // if
-      }
+      } // if
     else
       {
         format = "%" + (1 + index + "<-UNMATCHED".length()) + "s";
-        pen.format(format, close + "<-UNMATCHED");
+        pen.format(format, close + "<-UNMATCHED"); // format the string
         pen.println();
-      }
+      } // else
   } // drawLine
 } // class MatchParen
 
