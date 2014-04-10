@@ -4,6 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
+/**
+ * A user interface for the calculator
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class CalcView
 {
   /**

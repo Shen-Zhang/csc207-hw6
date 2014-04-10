@@ -2,6 +2,13 @@ package problem;
 
 import java.io.PrintWriter;
 
+/**
+ * A program to check if the parentheses or brackets in a string is matched
+ * properly
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class MatchParen
 {
 

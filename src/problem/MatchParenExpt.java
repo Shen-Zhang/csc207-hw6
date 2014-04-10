@@ -1,5 +1,11 @@
 package problem;
 
+/**
+ * A simple implementation of MatchParen
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class MatchParenExpt
 {
 

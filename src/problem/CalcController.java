@@ -1,5 +1,12 @@
 package problem;
 
+/**
+ * The controller for the calculator. Transfer commands to model and return
+ * result to view.
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class CalcController
 {
   // +--------+----------------------------------------------------------

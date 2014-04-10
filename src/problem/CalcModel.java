@@ -3,6 +3,12 @@ package problem;
 import java.util.Iterator;
 import java.util.Stack;
 
+/**
+ * A model to do the algebra and store values.
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class CalcModel<T>
 
 {
