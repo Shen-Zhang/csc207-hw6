@@ -139,19 +139,39 @@ public class ArrayBasedQueue<T>
     return new ArrayBasedQueueIterator<T>(this);
   } // iterator()
 
-
 } // class ArrayBasedQueue<T>
 
 class ArrayBasedQueueIterator<T>
     implements
       Iterator<T>
 {
-  // +--------+----------------------------------------------------------
-  int front;
+  // +--------+---------------------------------------------------------
+  // | Fields |
+  // +--------+
+
+  /**
+   * The index of the current element in the queue.
+   */
+  int current;
+  /**
+   * The index of the previous element in the queue.
+   */
   int prev;
+  /**
+   * The size of the queue
+   */
   int size;
+  /**
+   * values of the queue
+   */
   T[] vals;
+  /**
+   * A counter;
+   */
   int count;
+  /**
+   * A boolean flag to determine if is ok to dequeue.
+   */
   boolean okToRemove;
 
   // +--------------+----------------------------------------------------
@@ -163,7 +183,8 @@ class ArrayBasedQueueIterator<T>
    */
   public ArrayBasedQueueIterator(ArrayBasedQueue<T> q)
   {
-    this.front = q.front;
+
+    this.current = q.front;
     this.prev = 0;
     this.size = q.size;
     this.vals = q.values;
@@ -175,6 +196,9 @@ class ArrayBasedQueueIterator<T>
   // | Methods |
   // +---------+
 
+  /**
+   * Return the next value if exists
+   */
   @Override
   public T next()
     throws NoSuchElementException
@@ -184,14 +208,17 @@ class ArrayBasedQueueIterator<T>
         throw new NoSuchElementException("no elements remain");
       } // if no elements
     okToRemove = true;
-    int temp = this.front;
-    this.prev = this.front;
-    this.front = (this.front + 1) % this.size;
+    int temp = this.current;
+    this.prev = this.current;
+    this.current = (this.current + 1) % this.size;
     this.count++;
     return this.vals[temp];
-    
+
   } // next()
 
+  /**
+   * Check if the queue has remaining elements
+   */
   @Override
   public boolean hasNext()
   {
@@ -199,12 +226,18 @@ class ArrayBasedQueueIterator<T>
     return this.count < this.size;
   } // hasNext()
 
+  /**
+   * remove the recently returned element
+   */
   @Override
   public void remove()
     throws IllegalStateException
   {
     if (okToRemove)
-      this.vals[this.prev] = null;
+      {
+        this.vals[this.prev] = null;
+        this.count--;
+      } // if
     else
       throw new IllegalStateException();
   } // remove()

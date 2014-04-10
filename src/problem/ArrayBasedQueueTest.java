@@ -7,6 +7,12 @@ import java.util.Random;
 
 import org.junit.Test;
 
+/**
+ * Test if the ArrayBasedQueue is implemented properly
+ * 
+ * @author Shen Zhang
+ * 
+ */
 public class ArrayBasedQueueTest
 {
 
@@ -43,7 +49,7 @@ public class ArrayBasedQueueTest
         assertEquals(it.next().compareTo(z) == 0, true);
       }
   } // test1()
-  
+
   /**
    * test if the program can enqueue properly.
    */
